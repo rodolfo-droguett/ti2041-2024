@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Productos</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <ul>
+        {% for producto in productos %}
+            <li>{{ producto.nombre }} - {{ producto.precio }} - {{ producto.descripcion }}</li>
+        {% empty %}
+            <li>No hay productos disponibles</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'registro_producto' %}" class="btn-custom">Registrar nuevo producto</a>
+</body>
+</html>
