@@ -10,13 +10,70 @@
 </head>
 <body>
     <h1>Lista de Productos</h1>
-    <ul>
-        {% for producto in productos %}
-            <li>{{ producto.nombre }} - {{ producto.precio }} - {{ producto.descripcion }}</li>
-        {% empty %}
-            <li>No hay productos disponibles</li>
-        {% endfor %}
-    </ul>
+
+    <h2>Filtrar</h2>
+    <form method="GET" action=".">
+        <label for="marca">Marca:</label>
+        <select name="marca" id="marca">
+            <option value="">Todas</option>
+            {% for marca in marcas %}
+            <option value="{{ marca.id }}">{{ marca.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="categoria">Categoría:</label>
+        <select name="categoria" id="categoria">
+            <option value="">Todas</option>
+            {% for categoria in categorias %}
+            <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="caracteristica">Característica:</label>
+        <select name="caracteristica" id="caracteristica">
+            <option value="">Todas</option>
+            {% for caracteristica in caracteristicas %}
+            <option value="{{ caracteristica.id }}">{{ caracteristica.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Aplicar">
+    </form>
+    <br>
+
+    
+     
+    <table border="1" cellspacing="0" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Marca</th>
+                <th>Categoría</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.marca.nombre }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No hay productos disponibles</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
     <a href="{% url 'registro_producto' %}" class="btn-custom">Registrar nuevo producto</a>
+
+   
 </body>
 </html>
+
