@@ -13,25 +13,22 @@
     <form action="{% url 'registro_producto' %}" method="POST">
         {% csrf_token %}
 
-        <!-- Código del producto -->
+        
         <div>
             <label for="codigo">Código:</label><br>
             <input type="text" id="codigo" name="codigo" style="width: 38.5%; padding: 8px; margin-bottom: 10px;">
         </div>
 
-        <!-- Nombre del producto -->
         <div>
             <label for="nombre">Nombre:</label><br>
             <input type="text" id="nombre" name="nombre" style="width: 38.5%; padding: 8px; margin-bottom: 10px;">
         </div>
 
-        <!-- Precio del producto -->
         <div>
             <label for="precio">Precio:</label><br>
             <input type="number" id="precio" name="precio" step="0.01" style="width: 38.5%; padding: 8px; margin-bottom: 10px;">
         </div>
 
-        <!-- Marca del producto -->
         <div>
             <label for="marca">Marca:</label><br>
             <select name="marca" id="marca" style="width: 40%; padding: 8px; margin-bottom: 10px;">
@@ -41,7 +38,6 @@
             </select>
         </div>
 
-        <!-- Categoría del producto -->
         <div>
             <label for="categoria">Categoría:</label><br>
             <select name="categoria" id="categoria" style="width: 40%; padding: 8px; margin-bottom: 10px;">
@@ -51,7 +47,6 @@
             </select>
         </div>
 
-        <!-- Características del producto -->
         <div>
             <label for="caracteristicas">Características:</label><br>
             <select name="caracteristicas" id="caracteristicas" style="width: 40%; padding: 8px; margin-bottom: 10px;">
@@ -61,7 +56,6 @@
             </select>
         </div>
 
-        <!-- Botón para registrar -->
         <div>
             <input type="submit" value="Registrar Producto" class="btn-custom" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
         </div>

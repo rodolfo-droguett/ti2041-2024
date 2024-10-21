@@ -37,16 +37,13 @@ def registro_producto(request):
         categoria_id = request.POST.get('categoria')
         caracteristicas = request.POST.getlist('caracteristicas')
 
-        # Validación básica
         if not codigo or not nombre or not precio or not marca_id or not categoria_id:
             return render(request, 'resultado.html', {'mensaje': 'Faltan datos'})
 
-        # Crear el producto
         if Producto.objects.filter(codigo=codigo).exists():
             return render(request, 'resultado.html', {'mensaje': 'El código de producto ya existe. Intenta con otro.'})
 
         
-            # Crear el producto
         marca = Marca.objects.get(id=marca_id)
         categoria = Categoria.objects.get(id=categoria_id)
         producto = Producto.objects.create(
@@ -57,14 +54,12 @@ def registro_producto(request):
                 categoria=categoria
             )
 
-        # Añadir características
         for caracteristica_id in caracteristicas:
             caracteristica = Caracteristica.objects.get(id=caracteristica_id)
             producto.caracteristicas.add(caracteristica)
 
         return render(request, 'resultado.html', {'mensaje': 'Producto registrado'})
 
-    # Obtener datos para los selects y checkboxes
     marcas = Marca.objects.all()
     categorias = Categoria.objects.all()
     caracteristicas = Caracteristica.objects.all()
