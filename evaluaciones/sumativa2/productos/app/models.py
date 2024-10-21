@@ -29,5 +29,4 @@ class Caracteristica(models.Model):
     peso = models.CharField(max_length=100, blank=True, null=True)
     color = models.CharField(max_length=100, blank=True, null=True)
     
-    def __str__(self):
-        return f"{self.nombre}: {self.tamaño if self.tamaño else ''} {self.peso if self.peso else ''} {self.color if self.color else ''}"
+    
