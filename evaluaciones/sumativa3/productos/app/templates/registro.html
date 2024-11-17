@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Producto</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Registrar Producto</h1>
+    <form action="{% url 'registro_producto' %}" method="POST">
+        {% csrf_token %}
+
+        
+        <div>
+            <label for="codigo">Código:</label><br>
+            <input type="text" id="codigo" name="codigo" style="width: 38.5%; padding: 8px; margin-bottom: 10px;">
+        </div>
+
+        <div>
+            <label for="nombre">Nombre:</label><br>
+            <input type="text" id="nombre" name="nombre" style="width: 38.5%; padding: 8px; margin-bottom: 10px;">
+        </div>
+
+        <div>
+            <label for="precio">Precio:</label><br>
+            <input type="number" id="precio" name="precio" step="0.01" style="width: 38.5%; padding: 8px; margin-bottom: 10px;">
+        </div>
+
+        <div>
+            <label for="marca">Marca:</label><br>
+            <select name="marca" id="marca" style="width: 40%; padding: 8px; margin-bottom: 10px;">
+                {% for marca in marcas %}
+                <option value="{{ marca.id }}">{{ marca.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="categoria">Categoría:</label><br>
+            <select name="categoria" id="categoria" style="width: 40%; padding: 8px; margin-bottom: 10px;">
+                {% for categoria in categorias %}
+                <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="caracteristicas">Características:</label><br>
+            <select name="caracteristicas" id="caracteristicas" style="width: 40%; padding: 8px; margin-bottom: 10px;">
+                {% for caracteristica in caracteristicas %}
+                <option value="{{caracteristica.id}}">{{caracteristica.nombre}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <input type="submit" value="Registrar Producto" class="btn-custom" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+        </div>
+    </form>
+</body>
+</html>
+

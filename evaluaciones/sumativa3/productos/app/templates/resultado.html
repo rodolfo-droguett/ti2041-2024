@@ -1,0 +1,16 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de la Operación</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Resultado</h1>
+    <p>{{ mensaje }}</p>
+    <a href="{% url 'listar_productos' %}" class="btn-custom">Volver a la lista de productos</a>
+</body>
+</html>
