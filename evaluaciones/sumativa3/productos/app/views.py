@@ -17,7 +17,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            # Guardar datos en sesión
+            
             request.session['username'] = user.username
             request.session['login_time'] = str(now())
             request.session['is_admin_products'] = user.groups.filter(name='ADMIN_PRODUCTS').exists()
@@ -26,7 +26,7 @@ def login_view(request):
             return render(request, 'login.html', {'error': 'Credenciales inválidas'})
 
     return render(request, 'login.html')
-# Create your views here.
+
 
 @login_required
 def listar_productos(request):
