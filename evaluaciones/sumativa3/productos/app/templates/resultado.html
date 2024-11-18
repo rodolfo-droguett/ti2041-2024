@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
+    <div style="background-color: #f8f9fa; padding: 10px;">
+        <a href="/admin/">Administración</a> |
+        <a href="/logout/">Desconectarse</a>
+    </div>
+    
     <h1>Resultado</h1>
     <p>{{ mensaje }}</p>
     <a href="{% url 'listar_productos' %}" class="btn-custom">Volver a la lista de productos</a>

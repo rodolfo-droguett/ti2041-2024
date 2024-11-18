@@ -1,7 +1,34 @@
 from django.shortcuts import render, redirect
 from .models import Producto, Marca, Categoria, Caracteristica
+from django.contrib.auth import authenticate, login, logout
+from django.utils.timezone import now
+from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            # Guardar datos en sesión
+            request.session['username'] = user.username
+            request.session['login_time'] = str(now())
+            request.session['is_admin_products'] = user.groups.filter(name='ADMIN_PRODUCTS').exists()
+            return redirect('listar_productos')
+        else:
+            return render(request, 'login.html', {'error': 'Credenciales inválidas'})
+
+    return render(request, 'login.html')
 # Create your views here.
+
+@login_required
 def listar_productos(request):
     productos = Producto.objects.all()
     marcas = Marca.objects.all()
@@ -28,6 +55,7 @@ def listar_productos(request):
         'caracteristicas': caracteristicas
     })
 
+@login_required
 def registro_producto(request):
     if request.method == 'POST':
         codigo = request.POST.get('codigo')

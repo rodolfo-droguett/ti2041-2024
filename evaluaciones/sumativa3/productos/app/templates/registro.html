@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
+    <div style="background-color: #f8f9fa; padding: 10px;">
+        <a href="/admin/">Administración</a> |
+        <a href="/logout/">Desconectarse</a>
+    </div>
+    
     <h1>Registrar Producto</h1>
     <form action="{% url 'registro_producto' %}" method="POST">
         {% csrf_token %}
