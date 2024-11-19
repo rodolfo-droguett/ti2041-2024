@@ -5,11 +5,19 @@ from django.utils.timezone import now
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 
+
+
+def csrf_failure(request, reason=""):
+    return redirect('login')
+
 def logout_view(request):
     logout(request)
     return redirect('login')
 
 def login_view(request):
+
+    
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
