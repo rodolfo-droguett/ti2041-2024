@@ -7,6 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Productos</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script>
+        async function cargarProductos() {
+            try {
+                const response = await fetch('/api/productos');
+                const productos = await response.json();
+                
+                const tbody = document.getElementById('productos-tbody');
+                tbody.innerHTML = ''; 
+
+                if (productos.length > 0) {
+                    productos.forEach(producto => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${producto.codigo}</td>
+                            <td>${producto.nombre}</td>
+                            <td>${producto.precio}</td>
+                            <td>${producto.marca}</td>
+                            <td>${producto.categoria}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td colspan="5">No hay productos disponibles</td>`;
+                    tbody.appendChild(tr);
+                }
+            } catch (error) {
+                console.error("Error al cargar los productos:", error);
+            }
+        }
+
+
+        window.onload = cargarProductos;
+    </script>
 </head>
 <body>
     <div style="background-color: #007bff; padding: 10px;">
@@ -17,37 +52,21 @@
     <h1>Lista de Productos</h1>
 
     <h2>Filtrar</h2>
-    <form method="GET" action=".">
+    <form id="filtro-form">
         <label for="marca">Marca:</label>
         <select name="marca" id="marca">
             <option value="">Todas</option>
-            {% for marca in marcas %}
-            <option value="{{ marca.id }}">{{ marca.nombre }}</option>
-            {% endfor %}
         </select>
 
         <label for="categoria">Categoría:</label>
         <select name="categoria" id="categoria">
             <option value="">Todas</option>
-            {% for categoria in categorias %}
-            <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
-            {% endfor %}
         </select>
 
-        <label for="caracteristica">Característica:</label>
-        <select name="caracteristica" id="caracteristica">
-            <option value="">Todas</option>
-            {% for caracteristica in caracteristicas %}
-            <option value="{{ caracteristica.id }}">{{ caracteristica.nombre }}</option>
-            {% endfor %}
-        </select>
-
-        <input type="submit" value="Aplicar">
+        <input type="button" value="Aplicar" onclick="cargarProductos()">
     </form>
     <br>
 
-    
-     
     <table border="1" cellspacing="0" cellpadding="10">
         <thead>
             <tr>
@@ -58,27 +77,12 @@
                 <th>Categoría</th>
             </tr>
         </thead>
-        <tbody>
-            {% for producto in productos %}
-            <tr>
-                <td>{{ producto.codigo }}</td>
-                <td>{{ producto.nombre }}</td>
-                <td>{{ producto.precio }}</td>
-                <td>{{ producto.marca.nombre }}</td>
-                <td>{{ producto.categoria.nombre }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">No hay productos disponibles</td>
-            </tr>
-            {% endfor %}
+        <tbody id="productos-tbody">
+            
         </tbody>
     </table>
 
     <br>
     <a href="{% url 'registro_producto' %}" class="btn-custom">Registrar nuevo producto</a>
-
-   
 </body>
 </html>
-

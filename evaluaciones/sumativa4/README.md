@@ -1,4 +1,5 @@
-Evaluación Sumativa 3
+Evaluación Sumativa 4 (http://127.0.0.1:8000/api/docs)
+
 
 Este proyecto es una aplicación web desarrollada con Django para gestionar productos, marcas, categorías y características. Incluye funciones como registro, filtrado y validación de productos, además de medidas de seguridad implementadas para garantizar una experiencia segura.
 

@@ -54,7 +54,7 @@ def obtener_token(request, data: AuthRequest):
     token = generar_token(user)
     return {"token": token}
 
-# Endpoints para productos
+
 @api.get("/productos", response=List[ProductoSchema], tags=["Productos"])
 def listar_productos(request, marca: int = None, categoria: int = None):
     productos = Producto.objects.all()
